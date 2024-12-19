@@ -8,10 +8,16 @@ root_dir = dirname(dirname(current_dir))
 env_file = os.path.join(root_dir, '.env')
 load_dotenv(env_file)
 
-client = AzureOpenAI(azure_endpoint=os.environ["OPENAI_API_BASE"],
-api_version=os.environ["OPENAI_API_VERSION"],
-api_key=os.environ["OPENAI_API_KEY"])
+# client = AzureOpenAI(azure_endpoint=os.environ["OPENAI_API_BASE"],
+# api_version=os.environ["OPENAI_API_VERSION"],
+# api_key=os.environ["OPENAI_API_KEY"])
 
+client = AzureOpenAI(
+    azure_endpoint=os.getenv("AZURE_ENDPOINT"),  # Changed variable name
+    api_version=os.getenv("API_VERSION"),        # Changed variable name
+    api_key=os.getenv("API_KEY")                 # Changed variable name
+)
+    
 def ai_chat(user_message):
     message_text = [
         {"role": "system", "content": "You are an AI assistant that helps people find information."},
